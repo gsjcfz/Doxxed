@@ -7,8 +7,13 @@ namespace Doxxed.Pages
     [Authorize]
     public class IndexModel : PageModel
     {
+        
         public void OnGet()
         {
+        }
+        public void OnPost() 
+        {
+
         }
     }
 }

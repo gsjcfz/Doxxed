@@ -1,16 +1,16 @@
 ﻿@page
 @model Doxxed.Pages.IndexModel
 @{
-	ViewData["Title"] = "Doxxed";
-	Layout = "~/Areas/Identity/Pages/_Layout.cshtml";
+    ViewData["Title"] = "Doxxed";
+    Layout = "~/Areas/Identity/Pages/_Layout.cshtml";
 }
 
 <div class="text-center">
     <h4>Tools</h4>
     <p>Enter a username to search hundreds of online platforms.</p>
     <form method="post" id="usernameForm">
-        <input type="text" id="username" name="username" placeholder="Enter Username" required>
+        <input type="text" id="username" name="Username" placeholder="Enter Username" required>
         <button type="submit">Search</button>
     </form>
-    <div id="searchResults"></div>
+    
 </div>
