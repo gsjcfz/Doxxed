@@ -60,7 +60,7 @@ def run(username):
 
     detected_urls = []
     undetected_urls = []
-    unreachable_urls = []
+  
 
     count = 0
     match = True
@@ -80,34 +80,35 @@ def run(username):
                     
                     undetected_urls.append((url, username))
             else:
-                unreachable_urls.append((url, username))
+                undetected_urls.append((url, username))
 
         except ReadTimeout:
-            unreachable_urls.append((url, username))
+            undetected_urls.append((url, username))
         except ConnectTimeout:
-            unreachable_urls.append((url, username))
+            undetected_urls.append((url, username))
         except SSLError:
-            unreachable_urls.append((url, username))
+            undetected_urls.append((url, username))
         except Exception as e:
-            unreachable_urls.append((url, username))
+            undetected_urls.append((url, username))
 
     total = len(web)
 
-    return print_output_data(detected_urls, undetected_urls, unreachable_urls)
+    return print_output_data(detected_urls, undetected_urls)
 
 
-def print_output_data(detected_urls, undetected_urls, unreachable_urls):
-    result_string = 'Detected URLs - Publicly Visible:\n' +'\n'
+def print_output_data(detected_urls, undetected_urls):
+    result_string = "<h3>Detected URLs - Publicly Visible:</h3>"
+    result_string += "<table><tr><th>Username</th><th>URL</th></tr>"
+
     for url, username in detected_urls:
-        result_string += f'{username} : {url}\n'
+        result_string += f"<tr><td>{username}</td><td><a href='{url}' target='_blank'>{url}</a></td></tr>"
+    result_string += "</table>"
 
-    result_string += '\nUnreachable URLs - Probably Fine:\n' + '\n'
-    for url, username in unreachable_urls:
-        result_string += f'{username} : {url}\n'
+    result_string += "<h3>Undetected URLs - Safe:</h3>"
+    result_string += "<table><tr><th>Username</th><th>URL</th></tr>"
 
-    result_string += '\nUndetected URLs - Safe:\n' +'\n'
     for url, username in undetected_urls:
-        result_string += f'{username} : {url}\n'
+        result_string += f"<tr><td>{username}</td><td><a href='{url}' target='_blank'>{url}</a></td></tr>"
+    result_string += "</table>"
 
     return result_string
-

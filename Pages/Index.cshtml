@@ -14,11 +14,11 @@
         @Html.AntiForgeryToken();
     </form>
 
-    @if (!string.IsNullOrEmpty(Model.ScriptOutput))
-    {
-        <div>
+    <div id="scriptOutput">
+        @if (!string.IsNullOrEmpty(Model.ScriptOutput))
+        {
             <h3>Script Output:</h3>
-            <pre>@Model.ScriptOutput</pre>
-        </div>
-    }
+            @Html.Raw(Model.ScriptOutput)
+        }
+    </div>
 </div>
