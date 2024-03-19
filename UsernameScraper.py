@@ -109,21 +109,13 @@ bandcamp, colourlovers, ifttt, ebay, slack, okcupid, trip, ello, tracky, basecam
 ]
 
 def search():
-    print(f'[+] searching for username : {username}')
+    print(colors.PURPLE + f'[+] searching for username : {username} across {len(web)} sites' + colors.END)
     time.sleep(0.5)
     print('------------')
     time.sleep(0.5)
     print('------------\n')
     time.sleep(0.5)
 
-    print(f'[+] SKAT v0.5 is working\n')
-    time.sleep(0.5)
-    print('------------')
-    time.sleep(0.5)
-    print('------------\n')
-    time.sleep(0.5)
-
-    time.sleep(1)
 
     detected_urls = []
     undetected_urls = []
@@ -138,17 +130,18 @@ def search():
                 if match == True:
                     print(f'[+] found matches')
                     match = False
-                print(f'\n[-] link : {url} \n[-] status : {r.status_code}')
+                print(colors.UNDERLINE + f'\n[-] link : {url}{colors.END} \n[-] https status : {r.status_code}')
                 if username in r.text:
                     print(colors.GREEN + f'[PM] Username:{username} - text has been detected in url.' + colors.END)
                     detected_urls.append((url, username))
+                    count += 1
                 else:
                     print(colors.YELLOW + f'[PM] Username:{username} - text has not been detected in url, could be a false positive.' + colors.END)
                     undetected_urls.append((url, username))
             else:
                 unreachable_urls.append((url, username))
                 
-            count += 1
+            
         except ReadTimeout:
             print(colors.RED + f'[ERROR] Timeout occurred while accessing URL: {url}' + colors.END)
             unreachable_urls.append((url, username))
@@ -173,7 +166,7 @@ def print_output_data(detected_urls, undetected_urls, unreachable_urls):
     for url, username in unreachable_urls:
         print(colors.YELLOW + f'{username} : {url}' + colors.END)
         
-    print(colors.GREEN + '\nUndetected URLs - Probably Fine:' + colors.END)
+    print(colors.GREEN + '\nUndetected URLs - Safe:' + colors.END)
     print('-' * 50)
     for url, username in undetected_urls:
         print(colors.GREEN + f'{username} : {url}' + colors.END)
