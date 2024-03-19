@@ -26,7 +26,7 @@ namespace Doxxed.Pages
                 return;
             }
 
-            Runtime.PythonDLL = @"C:\Users\16363\AppData\Local\Programs\Python\Python311\python311.dll";
+            Runtime.PythonDLL = @"C:\Users\16363\AppData\Local\Programs\Python\Python312\python312.dll";
             PythonEngine.Initialize();
 
             using (Py.GIL()) // Acquire the GIL (Global Interpreter Lock)
@@ -34,7 +34,7 @@ namespace Doxxed.Pages
                 try
                 {
                     // Construct the path to the script directory
-                    string scriptPath = System.IO.Path.Combine(_env.ContentRootPath, "Pages");
+                    string scriptPath = System.IO.Path.Combine(_env.ContentRootPath, "");
                     // Add the script directory to Python's search path
                     dynamic sys = Py.Import("sys");
                     sys.path.append(scriptPath);
