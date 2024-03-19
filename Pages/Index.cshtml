@@ -11,6 +11,14 @@
     <form method="post" id="usernameForm">
         <input type="text" id="username" name="Username" placeholder="Enter Username" required>
         <button type="submit">Search</button>
+        @Html.AntiForgeryToken();
     </form>
-    
+
+    @if (!string.IsNullOrEmpty(Model.ScriptOutput))
+    {
+        <div>
+            <h3>Script Output:</h3>
+            <pre>@Model.ScriptOutput</pre>
+        </div>
+    }
 </div>
