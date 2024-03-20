@@ -97,18 +97,22 @@ def run(username):
 
 
 def print_output_data(detected_urls, undetected_urls):
-    result_string = "<h3>Detected URLs - Publicly Visible:</h3>"
-    result_string += "<table><tr><th>Username</th><th>URL</th></tr>"
+    result_string = '<div style="text-align: center;">'  # Container for centering the content
+
+    result_string += "<h3>Detected URLs - Publicly Visible:</h3>"
+    result_string += '<table style="margin: 0 auto;"><tr><th>Username</th><th>URL</th></tr>'  # Centered table
 
     for url, username in detected_urls:
         result_string += f"<tr><td>{username}</td><td><a href='{url}' target='_blank'>{url}</a></td></tr>"
     result_string += "</table>"
 
     result_string += "<h3>Undetected URLs - Safe:</h3>"
-    result_string += "<table><tr><th>Username</th><th>URL</th></tr>"
+    result_string += '<table style="margin: 0 auto;"><tr><th>Username</th><th>URL</th></tr>'  # Centered table
 
     for url, username in undetected_urls:
         result_string += f"<tr><td>{username}</td><td><a href='{url}' target='_blank'>{url}</a></td></tr>"
     result_string += "</table>"
+
+    result_string += "</div>"  # Close the container
 
     return result_string

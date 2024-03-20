@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Hosting;
-using Python.Runtime; // Import Python.Runtime namespace
+using Python.Runtime;
+using Microsoft.AspNetCore.Authorization; // Import Python.Runtime namespace
 
 namespace Doxxed.Pages
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IWebHostEnvironment _env;
