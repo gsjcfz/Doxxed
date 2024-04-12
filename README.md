@@ -30,6 +30,29 @@ Explanation of the organization of files and folders within the repository.
 Instructions on how to run the application's toolkit.
 
 ## Requirements
+1. **Download Microsoft Visual Studio Community**: https://visualstudio.microsoft.com/downloads/
+2. Run the installer, and make sure to select Asp.Net web development when you are given the option. If you forget to do this, you can always re-run the installer and modify from the Workloads tab.
+
+1. **Download Microsoft SQL Express**: https://www.microsoft.com/en-us/download/details.aspx?id=101064
+2. Run the installer, I did the basic installation.
+3. After the installation is complete, note your connection string: **Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;**
+4. You can also install SQL Server Management studio (SSMS) which will give you a better look at the database schema, but this isn't required.
+
+1. **Clone the GitHub files from your github repo into the file directory where you want your project.**
+2. I used command prompt, but you could also do it directory in visual studio.
+
+1. **Open the Doxxed.sln file with Visual Studio to open the project**
+2. Run the debugger by pressing the green triangle button that says "https". Note: if you get an error about the target SDK being .Net 8.0, you need to upgrade your Visual Studio to the latest version.
+3. You will likely be asked to install two certificates, accept and install both of them
+4. Your default browser should launch. You may have to allow unsafe sites to access the page (chrome://flags/#allow-insecure-localhost to allow only for localhost)
+
+1. **To migrate the database for login system functionality**
+2. open tools-> NuGet Package Manager -> Console
+3. Type 'Add-Migration "Database""'
+4. After the build succeeds, type "Update-Database". This should insert all the neccessary tables into your sqlserver.
+
+**You can now register an account and login to the tool.**
+
 
 ### Installing Required Packages
 
