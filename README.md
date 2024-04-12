@@ -117,12 +117,14 @@ Description of the flow of the application's functionality.
 
 
 ## To-Do
-- [ ] Integrate additional OSINT gathering tools into portfolio
+- [ ] Tripp: Integrate additional OSINT gathering tools into portfolio
   - [ ] Interactive Visualization Tool
-  - [ ] Phone number analysis 
+  - [ ] Phone number analysis
+  - [ ] Look for new OSINT gathering tools 
 - [ ] Add report generation functionality with heuristics
-  - [ ] Reliable mail client  
-  - [ ] Report Generation & Artifacts/Metadata
-- [ ] Beautify Initial Site
-- [ ] Identification process solution
-  - [ ] Possibly add a faux identification and explain in presentation that we won't pay for the API 
+  - [ ] Avery: Reliable mail client written in Python. Be able to send a random pdf to a specified email address.
+  - [ ] Nick & Tripp: Report Generation & Artifacts/Metadata, create PDF from updated OSINT info
+- [ ] Alex: Identification process solution
+  - [ ] Possibly add a faux identification and explain in presentation that we won't pay for the API
+- [ ] Grant: Add instructions for how to run program after first install
+- [ ] Grant: Alter our html for PDF display
