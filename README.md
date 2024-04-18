@@ -39,7 +39,7 @@ Instructions on how to run the application's toolkit.
 4. You can also install SQL Server Management studio (SSMS) which will give you a better look at the database schema, but this isn't required.
 
 1. **Clone the GitHub files from your github repo into the file directory where you want your project.**
-2. I used command prompt, but you could also do it directory in visual studio.
+2. I used command prompt, but you could also do it directly in visual studio.
 
 1. **Open the Doxxed.sln file with Visual Studio to open the project**
 2. Run the debugger by pressing the green triangle button that says "https". Note: if you get an error about the target SDK being .Net 8.0, you need to upgrade your Visual Studio to the latest version.
