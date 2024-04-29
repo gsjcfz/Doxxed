@@ -415,4 +415,5 @@ def plookup(ccode,pcode,rempart):
     print(Fore.CYAN + "Country : " + Fore.GREEN + country)
     print(Fore.CYAN + "Provider : " + Fore.GREEN + provider)
 
-    #Coded by Shahin
+if __name__ == "__main__":
+    plookup("1", "314", "6810420")
