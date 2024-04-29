@@ -1,7 +1,8 @@
 import requests
 import time
 from requests.exceptions import ReadTimeout, ConnectTimeout, SSLError
-
+import sys, os
+from supporting_funcs import *
 
 class colors:
     RED = '\033[91m'
@@ -66,7 +67,7 @@ def run(username):
     match = True
     for url in web:
         try:
-            r = requests.get(url, timeout=10)
+            r = requests.get(url, timeout=3)
             if r.status_code == 200:
                 if match:
                     
@@ -116,3 +117,33 @@ def print_output_data(detected_urls, undetected_urls):
     result_string += "</div>"  # Close the container
 
     return result_string
+    
+    
+# runs all open source doxing tools using as many args as provided
+    
+     
+def osint_gather_and_send(email: str = None, username: str = None, phone_number: str = None, ip_addr: str = None, firstname: str = None, lastname: str = None):
+	#if email is not None:
+		# not working properly, do not remove comment
+		#os.system("python vector/vector.py {}".format(email))
+	if username is not None:
+		os.system("python vector/vector.py {}".format(username))
+	if ip_addr is not None:
+		os.system("python vector/vector.py {}".format(ip_addr))
+	if phone_number is not None:
+		os.system("python vector/vector.py {}".format(phone_number))
+
+	
+
+		
+    
+    
+# call this main to get 
+def main():
+    username = "gjones42"
+    ip_addr = "172.59.171.136"
+    osint_gather_and_send(username = username, ip_addr = ip_addr)
+    
+    
+if __name__ == "__main__":
+	main()
