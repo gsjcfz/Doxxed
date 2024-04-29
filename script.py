@@ -1,7 +1,7 @@
 import requests
 import time
 from requests.exceptions import ReadTimeout, ConnectTimeout, SSLError
-
+import sys, os
 
 class colors:
     RED = '\033[91m'
@@ -66,7 +66,7 @@ def run(username):
     match = True
     for url in web:
         try:
-            r = requests.get(url, timeout=10)
+            r = requests.get(url, timeout=3)
             if r.status_code == 200:
                 if match:
                     
@@ -116,3 +116,37 @@ def print_output_data(detected_urls, undetected_urls):
     result_string += "</div>"  # Close the container
 
     return result_string
+    
+    
+# runs all open source doxing tools using as many args as provided
+     
+def osint_gather_and_send(email: str = None, username: str = None, phone_number: str = None, ip_addr: str = None, firstname: str = None, lastname: str = None):
+	#if email is not None:
+		# not working properly, do not remove comment
+		#os.system("python vector/vector.py {}".format(email))
+	if username is not None:
+		os.system("python vector/vector.py {}".format(username))
+	if ip_addr is not None:
+		os.system("python vector/vector.py {}".format(ip_addr))
+	
+    # TODO ADD EMAIL SENDING FUNCTION HERE 
+    #...WHICH STRIPS INFO FROM IP DATA FILE IN Data/{ip_addr}.txt
+    #...USE EMAIL ADDRESS PARAMETER HERE WITH THEIR FIRST AND LAST NAME
+    #... ATTACH Data/{username}.html TO THE EMAIL INSTEAD OF ZIP OR PDF.
+    #... MAY NEED TO ZIP IT IN FOLDER IF HTML WONT SEND DIRECTLY
+		
+    # TODO: GRANT YOU CAN RETURN THE HTML FILE LOCATION HERE
+    #... IF YOU WANT TO EMBED THE RESULTS DIRECTLY IN THE WEBPAGE 
+    
+    
+    
+    
+# call this file as just $python script.py and it'll run with these defaults
+def main():
+    username = "supahtripp"
+    ip_addr = "172.59.171.136"
+    osint_gather_and_send(username = username, ip_addr = ip_addr)
+    
+    
+if __name__ == "__main__":
+	main()
