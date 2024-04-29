@@ -5,11 +5,54 @@
     Layout = "~/Areas/Identity/Pages/_Layout.cshtml";
 }
 
+<style>
+    .form-group {
+        margin-bottom: 10px; /* Vertical spacing between form groups */
+    }
+
+    label, input {
+        display: block; /* Makes the label and input appear on new lines */
+    }
+
+    input {
+        width: 100%; /* Ensures all inputs take the full width of their container */
+        box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    }
+
+    #osintForm {
+        width: 300px; /* Fixed width of the form */
+        margin: auto; /* Centers the form horizontally */
+    }
+</style>
+
 <div class="text-center">
-    <h4>Tools</h4>
-    <p>Enter a username to search hundreds of online platforms.</p>
-    <form method="post" id="usernameForm">
-        <input type="text" id="username" name="Username" placeholder="Enter Username" required>
+    <h4>OSINT Tools</h4>
+    <p>Enter the details to search across multiple platforms.</p>
+    <form method="post" id="osintForm">
+        <div class="form-group">
+            <label for="Username">Username:</label>
+            <input type="text" id="Username" name="Username" placeholder="Enter Username" required>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" name="Email" placeholder="Enter Email">
+        </div>
+        <div class="form-group">
+            <label for="PhoneNumber">Phone Number:</label>
+            <input type="text" id="PhoneNumber" name="PhoneNumber" placeholder="Enter Phone Number">
+        </div>
+        <div class="form-group">
+            <label for="IpAddress">IP Address:</label>
+            <input type="text" id="IpAddress" name="IpAddress" placeholder="Enter IP Address">
+        </div>
+        <div class="form-group">
+            <label for="FirstName">First Name:</label>
+            <input type="text" id="FirstName" name="FirstName" placeholder="Enter First Name">
+        </div>
+        <div class="form-group">
+            <label for="LastName">Last Name:</label>
+            <input type="text" id="LastName" name="LastName" placeholder="Enter Last Name">
+        </div>
         <button type="submit">Search</button>
         @Html.AntiForgeryToken();
     </form>
@@ -19,6 +62,12 @@
         {
             <h3>Script Output:</h3>
             @Html.Raw(Model.ScriptOutput)
+        }
+
+        @if (!string.IsNullOrEmpty(Model.HtmlContent))
+        {
+            <h3>Results:</h3>
+            @Html.Raw(Model.HtmlContent)
         }
     </div>
 </div>

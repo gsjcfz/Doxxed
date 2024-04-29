@@ -124,10 +124,16 @@ def osint_gather_and_send(email: str = None, username: str = None, phone_number:
 	#if email is not None:
 		# not working properly, do not remove comment
 		#os.system("python vector/vector.py {}".format(email))
-	if username is not None:
-		os.system("python vector/vector.py {}".format(username))
-	if ip_addr is not None:
-		os.system("python vector/vector.py {}".format(ip_addr))
+    try:
+        if username is not None:
+            os.system(f"python vector/vector.py {username}")
+        if ip_addr is not None:
+            os.system(f"python vector/vector.py {ip_addr}")
+
+        return "Please check your email for results"
+    except Exception as e:
+        return f"Error in Python script: {str(e)}"
+
 	
     # TODO ADD EMAIL SENDING FUNCTION HERE 
     #...WHICH STRIPS INFO FROM IP DATA FILE IN Data/{ip_addr}.txt
@@ -139,14 +145,13 @@ def osint_gather_and_send(email: str = None, username: str = None, phone_number:
     #... IF YOU WANT TO EMBED THE RESULTS DIRECTLY IN THE WEBPAGE 
     
     
-    
-    
-# call this file as just $python script.py and it'll run with these defaults
+    # call this file as just $python script.py and it'll run with these defaults
 def main():
-    username = "supahtripp"
-    ip_addr = "172.59.171.136"
+    username = "johndoe"
+    ip_addr = "72.172.219.236"
     osint_gather_and_send(username = username, ip_addr = ip_addr)
     
     
 if __name__ == "__main__":
 	main()
+    
