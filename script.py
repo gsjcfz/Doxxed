@@ -2,6 +2,14 @@ import requests
 import time
 from requests.exceptions import ReadTimeout, ConnectTimeout, SSLError
 import sys, os
+import base64
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from requests import HTTPError
+from email import encoders
 
 class colors:
     RED = '\033[91m'
@@ -118,6 +126,39 @@ def print_output_data(detected_urls, undetected_urls):
     return result_string
     
     
+def email_sender(to_addr, file_to_send, first_name, last_name, ip_addr):
+    print('entered')
+    from_addr = 'capstonetest8@gmail.com'
+    subject = 'Email Subject'
+
+    SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
+            
+    flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+    creds = flow.run_local_server(port=0)
+
+    service = build('gmail', 'v1', credentials=creds)
+
+    msg = MIMEMultipart()
+    msg['From'] = from_addr
+    msg['To'] = to_addr
+    msg['Subject'] = subject
+    file = 'Data/' + ip_addr + '.txt'
+    with open(file):
+        body = file.readlines()
+    msg.attach(MIMEText(body, 'plain'))
+    attachment = open(file_to_send, 'rb')
+
+    p = MIMEBase('application', 'octet-stream')
+    p.set_payload(attachment.read())
+    encoders.encode_base64(p)
+    p.add_header('Content-Disposition', "attachment; filename= %s" % file_to_send)
+
+    msg.attach(p)
+
+    create_message = {'raw': base64.urlsafe_b64encode(msg.as_bytes()).decode()}
+
+    service.users().messages().send(userId="me", body=create_message).execute()
+    return
 # runs all open source doxing tools using as many args as provided
      
 def osint_gather_and_send(email: str = None, username: str = None, phone_number: str = None, ip_addr: str = None, firstname: str = None, lastname: str = None):
@@ -129,6 +170,9 @@ def osint_gather_and_send(email: str = None, username: str = None, phone_number:
             os.system(f"python vector/vector.py {username}")
         if ip_addr is not None:
             os.system(f"python vector/vector.py {ip_addr}")
+
+        temp = 'Data/' + username + '.html'
+        email_sender(to_addr=email, file_to_send=temp, first_name=firstname, last_name=lastname, ip_addr=ip_addr)
 
         return "Please check your email for results"
     except Exception as e:
@@ -147,11 +191,13 @@ def osint_gather_and_send(email: str = None, username: str = None, phone_number:
     
     # call this file as just $python script.py and it'll run with these defaults
 def main():
-    username = "johndoe"
+    username = "bob"
     ip_addr = "72.172.219.236"
     osint_gather_and_send(username = username, ip_addr = ip_addr)
-    
-    
+
+
+
+
 if __name__ == "__main__":
 	main()
     
