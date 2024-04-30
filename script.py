@@ -3,7 +3,7 @@ import time
 from requests.exceptions import ReadTimeout, ConnectTimeout, SSLError
 import sys, os
 import base64
-import pdfkit
+#import pdfkit
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
@@ -130,7 +130,7 @@ def print_output_data(detected_urls, undetected_urls):
 def email_sender(to_addr, file_to_send, first_name, last_name, ip_addr):
     print('entered')
     from_addr = 'capstonetest8@gmail.com'
-    subject = 'Email Subject'
+    subject = 'Doxxed Information Report'
 
     SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
             
@@ -146,14 +146,14 @@ def email_sender(to_addr, file_to_send, first_name, last_name, ip_addr):
     file_path = 'Data/' + ip_addr + '.txt'
     with open(file_path) as f:
         body = f.readlines()
-    body = '\n'.join(body)
+    body = body[1:]
+    body = '-'.join(body)
+    body = 'Here is a report of your digital footprint:  \n\n' + "The following information was found from your ip-address:" + '\n-' + body + '\n\n' + "The attached file below shows a graphical representation of your online presence. The file must be downloaded to be viewed properly.\n"
+
     msg.attach(MIMEText(body, 'plain'))
     attachment = open(file_to_send, 'rb')
     print('HERE: ', file_to_send)
-    config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
-    file_to_send = pdfkit.from_file(file_to_send, 'send.pdf', verbose=True, options={"enable-local-file-access": True}, configuration=config)
-    print("FILESENT: ", file_to_send)
-    file_to_send = 'send.pdf'
+   
     p = MIMEBase('application', 'octet-stream')
     p.set_payload(attachment.read())
     encoders.encode_base64(p)
@@ -172,34 +172,22 @@ def osint_gather_and_send(email: str = None, username: str = None, phone_number:
 		# not working properly, do not remove comment
 		#os.system("python vector/vector.py {}".format(email))
     
-    #try:
-     #   if username is not None:
-     #       os.system(f"python vector/vector.py {username}")
-     #   if ip_addr is not None:
-     #       os.system(f"python vector/vector.py {ip_addr}")
+    try:
+        if username is not None:
+            os.system(f"python vector/vector.py {username}")
+        if ip_addr is not None:
+            os.system(f"python vector/vector.py {ip_addr}")
    
 
         temp = 'Data/' + username + '.html'
-        email = "hovennicholas@gmail.com"
         email_sender(to_addr=email, file_to_send=temp, first_name=firstname, last_name=lastname, ip_addr=ip_addr)
 
         return "Please check your email for results"
-    #except Exception as e:
+    except Exception as e:
         return f"Error in Python script: {str(e)}"
 
 
 	
-    # TODO ADD EMAIL SENDING FUNCTION HERE 
-    #...WHICH STRIPS INFO FROM IP DATA FILE IN Data/{ip_addr}.txt
-    #...USE EMAIL ADDRESS PARAMETER HERE WITH THEIR FIRST AND LAST NAME
-    #... ATTACH Data/{username}.html TO THE EMAIL INSTEAD OF ZIP OR PDF.
-    #... MAY NEED TO ZIP IT IN FOLDER IF HTML WONT SEND DIRECTLY
-		
-    # TODO: GRANT YOU CAN RETURN THE HTML FILE LOCATION HERE
-    #... IF YOU WANT TO EMBED THE RESULTS DIRECTLY IN THE WEBPAGE 
-    
-    
-    # call this file as just $python script.py and it'll run with these defaults
 def main():
     username = "supahtripp"
     ip_addr = "172.59.171.136"
