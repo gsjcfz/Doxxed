@@ -180,7 +180,7 @@ def osint_gather_and_send(email: str = None, username: str = None, phone_number:
    
 
         temp = 'Data/' + username + '.html'
-        #email_sender(to_addr=email, file_to_send=temp, first_name=firstname, last_name=lastname, ip_addr=ip_addr)
+        email_sender(to_addr=email, file_to_send=temp, first_name=firstname, last_name=lastname, ip_addr=ip_addr)
 
         return "Please check your email for results"
     except Exception as e:
@@ -189,14 +189,9 @@ def osint_gather_and_send(email: str = None, username: str = None, phone_number:
 
 	
 def main():
-    username = "saladsniffer"
+    username = "supahtripp"
     ip_addr = "172.59.171.136"
-    phone_number = "4086371212"
-    firstname = "Rachel"
-    lastname  = "Fraser"
-    email = "hovennicholas@gmail.com"
-    osint_gather_and_send(email, username, phone_number, ip_addr, firstname, lastname)
-    #osint_gather_and_send(username = username, ip_addr = ip_addr)
+    osint_gather_and_send(username = username, ip_addr = ip_addr)
 
 
 
